@@ -31,6 +31,7 @@ Representing a Graph:
 ### Traversal Algorithms:
 --
 *Breadth First Search* is a queue based Algorithm which traverses the Graph level by level.
+
 **Time Complexity:** $O(N+E)$
 **Space Complexity:** $O(N)$
 
@@ -58,5 +59,33 @@ if __name__ == "__main__":
     V = 5
     adj = [[1, 2], [0, 3, 4], [0, 3], [1, 2, 4], [1, 3]]
     print(breadthFirstSearch(V, adj))
+```
+
+*Depth First Search* is a stack-based Algorithm which traverses the Graph in Depth
+
+***Time Complexity:** $O(N+E)$
+**Space Complexity:** $O(N)$
+
+```python
+from typing import List
+
+def depthFirstSearch(V: int, adj: List[int]):
+    vis = [0] * V
+    start = 0
+    ls = []
+    dfs(start, adj, vis, ls)
+    return ls  
+
+def dfs(node: int, adj: List[int], vis: List[int], d: List[int]):
+    vis[node] = 1
+    d.append(node)
+    for i in adj[node]:
+        if not vis[i]:
+            dfs(i, adj, vis, d)
+
+if __name__ == "__main__":
+    V = 5
+    adj = [[1], [2], [3], [4], []]
+    print(depthFirstSearch(V, adj))
 ```
 
