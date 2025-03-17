@@ -28,5 +28,35 @@ Representing a Graph:
 #### Connected Graphs:
 > Whenever you are solving a Traversal Problem. Use visited node array.
 
+### Traversal Algorithms:
+--
+*Breadth First Search* is a queue based Algorithm which traverses the Graph level by level.
+**Time Complexity:** $O(N+E)$
+**Space Complexity:** $O(N)$
 
+```python
+from collections import deque
+
+def breadthFirstSearch(V, adj):
+    vis = [0] * V
+    vis[0] = 1
+    q = deque([0])
+    bfs = []
+
+    while len(q) != 0:
+        node = q.popleft()
+        bfs.append(node)
+
+        for i in adj[node]:
+            if not (vis[i]):
+                vis[i] = 1
+                q.append(i)
+    
+    return bfs
+
+if __name__ == "__main__":
+    V = 5
+    adj = [[1, 2], [0, 3, 4], [0, 3], [1, 2, 4], [1, 3]]
+    print(breadthFirstSearch(V, adj))
+```
 
