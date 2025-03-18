@@ -31,6 +31,7 @@ Representing a Graph:
 ### Traversal Algorithms:
 --
 *Breadth First Search* is a queue based Algorithm which traverses the Graph level by level.
+
 **Time Complexity:** $O(N+E)$
 **Space Complexity:** $O(N)$
 
@@ -60,3 +61,64 @@ if __name__ == "__main__":
     print(breadthFirstSearch(V, adj))
 ```
 
+*Depth First Search* is a stack-based Algorithm which traverses the Graph in Depth
+
+***Time Complexity:** $O(N+E)$
+**Space Complexity:** $O(N)$
+
+```python
+from typing import List
+
+def depthFirstSearch(V: int, adj: List[int]):
+    vis = [0] * V
+    start = 0
+    ls = []
+    dfs(start, adj, vis, ls)
+    return ls  
+
+def dfs(node: int, adj: List[int], vis: List[int], d: List[int]):
+    vis[node] = 1
+    d.append(node)
+    for i in adj[node]:
+        if not vis[i]:
+            dfs(i, adj, vis, d)
+
+if __name__ == "__main__":
+    V = 5
+    adj = [[1], [2], [3], [4], []]
+    print(depthFirstSearch(V, adj))
+```
+
+#### Detecting Cycles:
+- Breadth First Search
+```python
+def detectCycle(src: int, adj: List[List[int]], vis: List[int]):
+    vis[src] = -1
+    q = deque()
+    q.append((src, -1))
+
+    while not q.count():
+        node, parent = q.popleft()
+        for i in adj[node]:
+            if not vis[i]:
+                vis[i] = 1
+                q.append((i, node))
+            elif parent != i:
+                return True
+
+        return False
+```
+- Depth First Search
+```python
+def cycleDFS(n, p, vis, adj):
+    vis[n] = 1
+
+    for i in adj[n]:
+        if not vis[i]:
+            if cycleDFS(i, n):
+                return True
+        elif i != p:
+            return True
+            
+    return False
+```
