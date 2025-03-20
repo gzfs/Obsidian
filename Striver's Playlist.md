@@ -122,3 +122,23 @@ def cycleDFS(n, p, vis, adj):
             
     return False
 ```
+#### Union and Find
+Two or more sets with nothing in common are called *Disjoint Sets.*
+- Used to keep track of the *Set* and element belongs to. Given two elements we can find whether they belong to the same subset or not. (*Find*)
+- Used to merge 2 Sets (*Union*)
+- Code without Rank
+	```python
+	class UnionFind:
+		def __init__(self, n):
+			self.parent = list(range(n))
+			self.size = [1] * n
+		def find(self, x):
+			if x != self.parent[x]:
+				self.parent[x] = self.find(self.parent[x])
+			return self.parent[x]
+		def union(self, x, y);
+			rx = self.find(x)
+			ry = self.find(y)
+			if rx != ry:
+				self.parent[ry] = rx
+	```
