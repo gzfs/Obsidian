@@ -142,3 +142,25 @@ Two or more sets with nothing in common are called *Disjoint Sets.*
 			if rx != ry:
 				self.parent[ry] = rx
 	```
+#### Bipartite Graph:
+Color the Graph using Two Colors such that no two *Adjacent Nodes* have the same color.
+- Linear Graphs with no Cycles are always Bi-Partite
+- Even Graphs can be Bi-Partite
+```python
+from collections import deque
+
+def bipartiteDetection(V: int, adj: List[List[int]]):
+	q = deque()
+	q.append(0)
+	color = [-1] * V
+	while q:
+		node = q.popleft()
+		for i in adj[node]:
+			if color[i] == -1:
+				color[i] = not color[node]
+				q.append(i)
+			elif color[i] == color[node]:
+				return False
+	return True 
+
+```
