@@ -166,21 +166,21 @@ def bipartiteDetection(V: int, adj: List[List[int]]):
 ```
 #### Detect a Cycle in a Directed Graph
 ```python
-def detectCycleDirectedDFS(
-    i: int, adj: List[List[int]], vis: List[int], p_vis: List[int]
-) -> bool:
-    vis[i] = 1
-    p_vis[i] = 1
-
-    for j in adj[i]:
-        if not vis[j]:
-            if detectCycleDirectedDFS(i, adj, vis, p_vis) == True:
-                return True
-        elif p_vis[i]:
-            return True
-
-    p_vis[i] = 0
-    return False
+	def detectCycleDirectedDFS(
+	    i: int, adj: List[List[int]], vis: List[int], p_vis: List[int]
+	) -> bool:
+	    vis[i] = 1
+	    p_vis[i] = 1
+	
+	    for j in adj[i]:
+	        if not vis[j]:
+	            if detectCycleDirectedDFS(i, adj, vis, p_vis) == True:
+	                return True
+	        elif p_vis[i]:
+	            return True
+	
+	    p_vis[i] = 0
+	    return False
 
 
 def isCyclicDirectedDFS(V: int, adj: List[List[int]]):
